@@ -1,91 +1,49 @@
 <?php
-require_once __DIR__ . '/vendor/autoload.php';
-
-
-date_default_timezone_set('America/Sao_Paulo');
-
-
+require 'vendor/autoload.php';
+ 
 $produtos = [
     [
-        'nome' => 'Caderno Universitário',
-        'categoria' => 'Papelaria',
-        'preco' => 19.90,
-        'descricao' => 'Caderno universitário com 200 folhas pautadas.'
+        'nome' => 'Relógio de Pulso',
+        'categoria' => 'Acessórios',
+        'preco' =>199,90,
+        'descricao' => 'Relógio digital resistente à água',
     ],
     [
-        'nome' => 'Caneta Azul',
-        'categoria' => 'Papelaria',
-        'preco' => 2.50,
-        'descricao' => 'Caneta esferográfica azul de ponta fina.'
+        'nome' => 'Cadeira de Escritório',
+        'categoria' => '>Mobiliário',
+        'preco' =>499,00,
+        'descricao' => 'Cadeira ergonômica com apoio lombar',
     ],
     [
-        'nome' => 'Garrafa Térmica',
-        'categoria' => 'Utilidades Domésticas',
-        'preco' => 45.00,
-        'descricao' => 'Garrafa térmica de aço inoxidável com capacidade de 1L.'
-    ],
-    [
-        'nome' => 'Fone de Ouvido',
+        'nome' => 'Notebook Gamer',
         'categoria' => 'Eletrônicos',
-        'preco' => 79.90,
-        'descricao' => 'Fone de ouvido estéreo com cancelamento de ruído.'
-    ]
+        'preco' => 3.299,00,
+        'descricao' => 'Notebook com alto desempenho gráfico',
+    ],
 ];
-
-
-$dataHoraGeracao = date("d/m/Y H:i");
-
-
+ 
 $mpdf = new \Mpdf\Mpdf();
-
-
-$html = '
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        h1 { color: #333; text-align: center; }
-        .data-hora { text-align: right; font-size: 12px; color: #666; margin-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; }
-        table, th, td { border: 1px solid #333; padding: 8px; }
-        th { background-color: #4CAF50; color: white; }
-        tr:nth-child(even) { background-color: #f2f2f2; }
-    </style>
-</head>
-<body>
-    <h1>Relatório de Produtos</h1>
-    <p class="data-hora">Data e Hora de Geração: ' . $dataHoraGeracao . '</p>
-    <table>
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Categoria</th>
-                <th>Preço (R$)</th>
-                <th>Descrição</th>
-            </tr>
-        </thead>
-        <tbody>';
-
+$dataHoraGeracao = date('d/m/Y H:i:s');
+ 
+$pdfContent = "<h1>Relatório de Produtos</h1>";
+$pdfContent .= "<div style='text-align: right; font-size: 12px;'>Gerado em: {$dataHoraGeracao}</div>";
+$pdfContent .= "<table style='width: 100%; border-collapse: collapse; margin: 20px 0;'>";
+$pdfContent .= "<tr><th style='border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;'>Nome</th>";
+$pdfContent .= "<th style='border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;'>Categoria</th>";
+$pdfContent .= "<th style='border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;'>Preço (R$)</th>";
+$pdfContent .= "<th style='border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2;'>Descrição</th></tr>";
+ 
 foreach ($produtos as $produto) {
-    $html .= '
-        <tr>
-            <td>' . $produto['nome'] . '</td>
-            <td>' . $produto['categoria'] . '</td>
-            <td>' . number_format($produto['preco'], 2, ',', '.') . '</td>
-            <td>' . $produto['descricao'] . '</td>
-        </tr>';
+    $pdfContent .= "<tr>";
+    $pdfContent .= "<td style='border: 1px solid #ddd; padding: 8px;'>{$produto['nome']}</td>";
+    $pdfContent .= "<td style='border: 1px solid #ddd; padding: 8px;'>{$produto['categoria']}</td>";
+    $pdfContent .= "<td style='border: 1px solid #ddd; padding: 8px;'>" . number_format($produto['preco'], 2, ',', '.') . "</td>";
+    $pdfContent .= "<td style='border: 1px solid #ddd; padding: 8px;'>{$produto['descricao']}</td>";
+    $pdfContent .= "</tr>";
 }
-
-$html .= '
-        </tbody>
-    </table>
-</body>
-</html>';
-
-
-$mpdf->WriteHTML($html);
-
-
-$mpdf->Output('relatorio_produtos.pdf', 'I'); 
+ 
+$pdfContent .= "</table>";
+ 
+$mpdf->WriteHTML($pdfContent);
+$mpdf->Output('relatorio_produtos.pdf', 'D');
 ?>
