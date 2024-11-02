@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório de Objetos</title>
+<style>
+    body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        margin: 20px; 
+        background-color: #f0f0f0; 
+        color: #333; 
+    }
+    h1 { 
+        text-align: center; 
+        color: #14cfe7; 
+    }
+    table { 
+        width: 100%; 
+        border-collapse: collapse; 
+        margin: 20px 0; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    th, td { 
+        border: 1px solid #ddd; 
+        padding: 12px; 
+        text-align: left; 
+    }
+    th { 
+        background-color: #148b94; 
+        color: white; 
+    }
+    tr:nth-child(even) { 
+        background-color: #f9f9f9; 
+    }
+    tr:hover { 
+        background-color: #e0e0e0; 
+    }
+    .header { 
+        text-align: center; 
+        margin-bottom: 20px; 
+    }
+    .btn { 
+        text-decoration: none; 
+        padding: 10px 15px; 
+        background-color: #2196F3; 
+        color: white; 
+        border-radius: 5px; 
+        transition: background-color 0.3s;
+    }
+    .btn:hover { 
+        background-color: #1976D2; 
+    }
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>Relatório de Objetos</h1>
+    <a href="relatorio_produtos.php" class="btn">Gerar PDF</a>
+</div>
+<table>
+<thead>
+<tr>
+<th>Nome</th>
+<th>Categoria</th>
+<th>Preço (R$)</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Relógio de Pulso</td>
+<td>Acessórios</td>
+<td>199,90</td>
+<td>Relógio digital resistente à água</td>
+</tr>
+<tr>
+<td>Cadeira de Escritório</td>
+<td>Mobiliário</td>
+<td>499,00</td>
+<td>Cadeira ergonômica com apoio lombar</td>
+</tr>
+<tr>
+<td>Notebook Gamer</td>
+<td>Eletrônicos</td>
+<td>3.299,00</td>
+<td>Notebook com alto desempenho gráfico</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
+
